@@ -7,6 +7,7 @@ import { Formik, Field, Form } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 import cn from 'classnames';
+import { toast } from 'react-toastify';
 
 import { tasksActions, tasksSelectors } from './tasksSlice';
 import routes from '../../api/routes.js';
@@ -34,7 +35,7 @@ const NewTaskForm = () => {
       dispatch(tasksActions.add(response.data));
       resetForm();
     } catch (error) {
-      console.log(error);
+      toast('Network error');
     }
   };
 
@@ -48,7 +49,10 @@ const NewTaskForm = () => {
       validateOnChange={false}
     >
       {({ isSubmitting, isValid, touched, errors }) => (
-        <Form className="form mb-3">
+        <Form className="form mb-3" data-testid="task-form">
+          <label className="visually-hidden" htmlFor="new-task">
+            New task
+          </label>
           <div className="input-group">
             <Field
               type="text"
@@ -59,6 +63,7 @@ const NewTaskForm = () => {
               placeholder="Please type text..."
               name="text"
               readOnly={isSubmitting}
+              id="new-task"
             />
             <button
               className="btn btn-outline-success"
@@ -70,7 +75,7 @@ const NewTaskForm = () => {
                   className="spinner-border me-1 spinner-border-sm"
                   role="status"
                   aria-hidden="true"
-                ></span>
+                />
               )}
               Add
             </button>
