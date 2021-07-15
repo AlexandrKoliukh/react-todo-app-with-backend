@@ -66,7 +66,15 @@ const List = ({ list }) => {
           disabled={state === listStates.loading}
           ref={buttonRef}
         >
-          <BsX />
+          {state === listStates.loading ? (
+            <span
+              className="spinner-border me-1 spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          ) : (
+            <BsX />
+          )}
         </button>
       )}
     </div>

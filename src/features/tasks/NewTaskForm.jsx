@@ -48,32 +48,37 @@ const NewTaskForm = () => {
       validateOnChange={false}
     >
       {({ isSubmitting, isValid, touched, errors }) => (
-        <>
-          <Form className="form mb-3">
-            <div className="input-group">
-              <Field
-                type="text"
-                className={cn('form-control', {
-                  'is-valid': isValid && touched.text,
-                  'is-invalid': !isValid && touched.text,
-                })}
-                placeholder="Please type text..."
-                name="text"
-                readOnly={isSubmitting}
-              />
-              <button
-                className="btn btn-outline-success"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Add
-              </button>
-              {errors.text && (
-                <div className="invalid-feedback">{errors.text}</div>
+        <Form className="form mb-3">
+          <div className="input-group">
+            <Field
+              type="text"
+              className={cn('form-control', {
+                'is-valid': isValid && touched.text,
+                'is-invalid': !isValid && touched.text,
+              })}
+              placeholder="Please type text..."
+              name="text"
+              readOnly={isSubmitting}
+            />
+            <button
+              className="btn btn-outline-success"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && (
+                <span
+                  className="spinner-border me-1 spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
               )}
-            </div>
-          </Form>
-        </>
+              Add
+            </button>
+            {errors.text && (
+              <div className="invalid-feedback">{errors.text}</div>
+            )}
+          </div>
+        </Form>
       )}
     </Formik>
   );

@@ -65,7 +65,15 @@ const NewListForm = () => {
               type="submit"
               disabled={isSubmitting || !values.text.trim()}
             >
-              <BsCheck />
+              {isSubmitting ? (
+                <span
+                  className="spinner-border me-1 spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              ) : (
+                <BsCheck />
+              )}
             </button>
             {errors.text && (
               <div className="invalid-feedback">{errors.text}</div>
